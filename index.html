@@ -394,11 +394,11 @@ body::before {
 
 .hero-headline {
   font-family: var(--font-head);
-  font-size: clamp(4rem, 9vw, 9.5rem);
-  line-height: 0.9;
+  font-size: clamp(2.6rem, 8vw, 9.5rem);
+  line-height: 1;
   color: var(--white);
   margin-bottom: 24px;
-  overflow: hidden;
+  overflow: visible;
 }
 .hero-headline .line {
   display: block;
@@ -1314,7 +1314,18 @@ footer {
   .contact-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .why-grid { grid-template-columns: 1fr 1fr; }
-  .hero-car-glow { display: none; }
+  .hero-car-glow {
+    width: 90%;
+    right: 0; left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    opacity: 0;
+    animation: carRevealMob 1.4s 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+  @keyframes carRevealMob { to { opacity: 0.08; transform: translateX(0); } }
+  .hero-content { position: relative; z-index: 10; }
+  #hero { align-items: flex-start; padding-top: 110px; min-height: 100svh; }
+  .hero-sub, .hero-sub-en { max-width: 100%; }
 }
 @media (max-width: 600px) {
   .section { padding: 70px 0; }
@@ -1326,9 +1337,11 @@ footer {
   .why-grid { grid-template-columns: 1fr; }
   .hero-ctas { flex-direction: column; }
   .about-detail { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .footer-bottom-links { justify-content: center; }
+  .hero-sub { font-size: 0.85rem; }
+  .hero-sub-en { font-size: 0.72rem; }
+  .hero-badge { font-size: 0.65rem; padding: 6px 14px; }
 }
 </style>
 </head>
@@ -1673,7 +1686,6 @@ footer {
 <section id="gallery" class="section">
   <div class="container">
     <div data-aos="fade-up">
-      <span class="section-label">Τα Έργα μας</span>
       <h2 class="section-title">Αποτελέσματα που<br><span>Μιλάνε</span></h2>
       <div class="ai-image-note">
         <i class="fas fa-camera"></i>
@@ -1806,7 +1818,7 @@ footer {
           <a href="#contact" class="btn btn-gold"><i class="fas fa-store"></i> Επικοινωνήστε για Τιμές</a>
         </div>
       </div>
-      <div class="products-visual" data-aos="fade-left" data-aos-delay="150">
+      <div class="products-visual" data-aos="fade-left" data-aos-delay="150" style="margin-top:40px;">
         <div class="products-badge-wrap">
           <i class="fas fa-certificate"></i>
           <p>Πιστοποιημένα επαγγελματικά brands για επαγγελματίες &amp; ερασιτέχνες</p>
@@ -1831,55 +1843,20 @@ footer {
       <span class="section-label">Ελάτε σε Επαφή</span>
       <h2 class="section-title">Κλείστε το <span>Ραντεβού</span> σας</h2>
       <p class="section-sub" style="margin:0 auto;">
-        Συμπληρώστε τη φόρμα ή επικοινωνήστε μαζί μας απευθείας. Θα σας απαντήσουμε το συντομότερο δυνατό.
+        Επικοινωνήστε μαζί μας απευθείας ή επισκεφτείτε το εργαστήριό μας. Θα σας εξυπηρετήσουμε άμεσα.
       </p>
     </div>
 
     <div class="contact-grid">
-      <!-- FORM -->
-      <div class="contact-form-wrap" data-aos="fade-right" data-aos-delay="100">
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fname">Ονοματεπώνυμο</label>
-              <input type="text" id="fname" name="name" placeholder="Γιώργης Παπαδόπουλος" required />
-            </div>
-            <div class="form-group">
-              <label for="fphone">Τηλέφωνο</label>
-              <input type="tel" id="fphone" name="phone" placeholder="+30 693 000 0000" required />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="femail">Email</label>
-            <input type="email" id="femail" name="email" placeholder="yourname@email.com" />
-          </div>
-          <div class="form-group">
-            <label for="fservice">Υπηρεσία</label>
-            <select id="fservice" name="service">
-              <option value="">— Επιλέξτε Υπηρεσία —</option>
-              <option>Ολική Βαφή Αυτοκινήτου</option>
-              <option>Επισκευή Γρατζουνιών / Βαθουλωμάτων</option>
-              <option>Premium Detailing</option>
-              <option>Κεραμική Επίστρωση</option>
-              <option>Μεμβράνη Προστασίας PPF</option>
-              <option>Αποκατάσταση Αμαξώματος</option>
-              <option>Interior Detailing</option>
-              <option>Αγορά Προϊόντων</option>
-              <option>Άλλο</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="fmessage">Μήνυμα</label>
-            <textarea id="fmessage" name="message" placeholder="Περιγράψτε μας το αυτοκίνητό σας και τι χρειάζεστε..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:16px;">
-            <i class="fas fa-paper-plane"></i> Αποστολή Αιτήματος
-          </button>
-        </form>
-        <div class="form-success" id="formSuccess">
-          <i class="fas fa-check-circle"></i>
-          <h3>Το μήνυμά σας στάλθηκε!</h3>
-          <p>Θα επικοινωνήσουμε μαζί σας σύντομα. Ευχαριστούμε για την εμπιστοσύνη σας.</p>
+      <!-- MAP (left) -->
+      <div data-aos="fade-right" data-aos-delay="100">
+        <div class="map-wrap" style="height:100%;min-height:480px;margin-top:0;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.123!2d23.5400!3d41.0900!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14adb1234567890%3A0xabcdef!2z0KHOrc-N0YDOtc-CLCDOo-Orc-N0YDOtc-CLCDOo-KM86y50LzOtc-C!5e0!3m2!1sel!2sgr!4v1234567890"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Makinatzis Location"></iframe>
         </div>
       </div>
 
@@ -1913,13 +1890,6 @@ footer {
             </div>
           </div>
           <div class="info-item">
-            <div class="info-item-icon"><i class="fas fa-globe"></i></div>
-            <div>
-              <h4>Website</h4>
-              <a href="https://makinatzis.gr" target="_blank">makinatzis.gr</a>
-            </div>
-          </div>
-          <div class="info-item">
             <div class="info-item-icon"><i class="fas fa-clock"></i></div>
             <div>
               <h4>Ώρες Λειτουργίας</h4>
@@ -1932,18 +1902,15 @@ footer {
           </div>
         </div>
 
-        <div class="map-wrap">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.123!2d23.5400!3d41.0900!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14adb1234567890%3A0xabcdef!2z0KHOrc-N0YDOtc-CLCDOo-Orc-N0YDOtc-CLCDOo-KM86y50LzOtc-C!5e0!3m2!1sel!2sgr!4v1234567890"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Makinatzis Location"></iframe>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="tel:+302321059922" class="btn btn-primary"><i class="fas fa-phone"></i> Καλέστε μας</a>
+          <a href="https://www.facebook.com/makinatziscarpaint/" target="_blank" class="btn btn-outline"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- =====================================================================
      FOOTER
@@ -1959,9 +1926,7 @@ footer {
         <div style="display:none;font-family:var(--font-head);font-size:2rem;letter-spacing:3px;color:var(--white);margin-bottom:16px;">MAKINA<span style="color:var(--red)">TZIS</span></div>
         <p>Εξειδικευμένο βαφείο αυτοκινήτων και κατάστημα ειδών καλλωπισμού αμαξώματος στις Σέρρες. Ποιότητα και αξιοπιστία από το 2009.</p>
         <div class="footer-social">
-          <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/makinatziscarpaint/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
         </div>
       </div>
 
@@ -2001,18 +1966,15 @@ footer {
           </li>
           <li style="color:var(--grey);font-size:0.82rem;display:flex;gap:10px;align-items:center;">
             <i class="fas fa-envelope" style="color:var(--red);"></i>
-            <a href="mailto:k.makinatzis@gmail.com" style="color:var(--grey-light);font-size:0.75rem;">k.makinatzis@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#89e2a7e4e8e2e0e7e8fdf3e0fac9eee4e8e0e5a7eae6e4" style="color:var(--grey-light);font-size:0.75rem;"><span class="__cf_email__" data-cfemail="5a3174373b3133343b2e2033291a3d373b333674393537">[email&#160;protected]</span></a>
           </li>
-          <li style="color:var(--grey);font-size:0.82rem;display:flex;gap:10px;align-items:center;">
-            <i class="fas fa-globe" style="color:var(--red);"></i>
-            <a href="https://makinatzis.gr" target="_blank" style="color:var(--gold);">makinatzis.gr</a>
-          </li>
+
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© 2025 <a href="https://makinatzis.gr">Makinatzis</a> · Carpaint &amp; Autodetailing · Σέρρες, Ελλάδα. Όλα τα δικαιώματα κατοχυρωμένα.</p>
+      <p>© 2025 Makinatzis · Carpaint &amp; Autodetailing · Σέρρες, Ελλάδα. Όλα τα δικαιώματα κατοχυρωμένα. · Designed by <a href="https://advonmedia.com" target="_blank" style="color:var(--gold);">Advon Media</a></p>
       <div class="footer-bottom-links">
         <a href="#">Πολιτική Απορρήτου</a>
         <a href="#">Όροι Χρήσης</a>
@@ -2022,7 +1984,7 @@ footer {
 </footer>
 
 <!-- AOS JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
 <script>
 /* =====================================================================
@@ -2218,40 +2180,10 @@ const statsObs = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 statsObs.observe(document.getElementById('stats'));
 
-/* =====================================================================
-   CONTACT FORM
-   ===================================================================== */
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Αποστολή...';
-  setTimeout(() => {
-    this.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-    document.getElementById('formSuccess').style.display = 'flex';
-    document.getElementById('formSuccess').style.flexDirection = 'column';
-    document.getElementById('formSuccess').style.alignItems = 'center';
-  }, 1400);
-});
+
 
 /* =====================================================================
    SMOOTH ACTIVE NAV
    ===================================================================== */
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-const sectionObs = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(link => {
-        link.style.color = link.getAttribute('href') === '#' + entry.target.id ? '#ffffff' : '';
-      });
-    }
-  });
-}, { threshold: 0.4 });
-sections.forEach(s => sectionObs.observe(s));
-
-</script>
-</body>
-</html>
+const navLinks = document.querySelecto
