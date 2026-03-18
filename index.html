@@ -2187,4 +2187,19 @@ statsObs.observe(document.getElementById('stats'));
    SMOOTH ACTIVE NAV
    ===================================================================== */
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelecto
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + entry.target.id ? '#ffffff' : '';
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => sectionObs.observe(s));
+
+</script>
+</body>
+</html>
